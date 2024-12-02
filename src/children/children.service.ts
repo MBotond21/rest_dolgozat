@@ -61,4 +61,15 @@ export class ChildrenService {
       })
     }catch{return undefined}
   }
+
+  async removeToy(id: number, toyId: number){
+    try{
+      return await this.db.child.update({
+        where: {id},
+        data: {
+          toys: {disconnect: [{id: toyId}]}
+        }
+      })
+    }catch{return undefined}
+  }
 }
