@@ -25,8 +25,8 @@ export class ChildrenService {
     });
   }
 
-  findOne(id: number) {
-    return this.db.child.findUnique({
+  async findOne(id: number) {
+    return await this.db.child.findUnique({
       where: { id },
       include: {
         toys: true
@@ -34,16 +34,20 @@ export class ChildrenService {
     });
   }
 
-  update(id: number, updateChildDto: UpdateChildDto) {
-    return this.db.child.update({
-      where: { id },
-      data: updateChildDto
-    });
+  async update(id: number, updateChildDto: UpdateChildDto) {
+    try{
+      return await this.db.child.update({
+        where: { id },
+        data: updateChildDto
+      });
+    }catch{return undefined}
   }
 
-  remove(id: number) {
-    return this.db.child.delete({
-      where: { id }
-    });
+  async remove(id: number) {
+    try{
+      return await this.db.child.delete({
+        where: { id }
+      });
+    }catch{return undefined}
   }
 }
