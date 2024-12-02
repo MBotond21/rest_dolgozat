@@ -20,14 +20,14 @@ export class ChildrenController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const child = await this.childrenService.findOne(+id);
-    if (!child) throw new NotFoundException(`No toy with id ${id} found`);
+    if (!child) throw new NotFoundException(`No child with id ${id} found`);
     return child;
   }
 
   @Patch(':id')
   async update(@Param('id') id: string, @Body() updateChildDto: UpdateChildDto) {
     const child = await this.childrenService.update(+id, updateChildDto);
-    if (!child) throw new NotFoundException(`No toy with id ${id} found`);
+    if (!child) throw new NotFoundException(`No child with id ${id} found`);
     return child;
   }
 
@@ -35,6 +35,6 @@ export class ChildrenController {
   @HttpCode(200)
   async remove(@Param('id') id: string) {
     const child = await this.childrenService.remove(+id);
-    if (!child) throw new NotFoundException(`No toy with id ${id} found`);
+    if (!child) throw new NotFoundException(`No child with id ${id} found`);
   }
 }
