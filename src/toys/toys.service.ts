@@ -22,33 +22,25 @@ export class ToysService {
   }
 
   async findOne(id: number) {
-    const toy =  await this.db.toy.findUnique({
+    return await this.db.toy.findUnique({
       where: {id}
     });
-    if(!toy){
-      throw new NotFoundException(`Toy with id ${id} not found!`);
-    }
-    return toy;
   }
 
   async update(id: number, updateToyDto: UpdateToyDto) {
-    const toy =  await this.db.toy.update({
-      where: {id},
-      data: updateToyDto
-    });
-    if(!toy){
-      throw new NotFoundException(`Toy with id ${id} not found!`);
-    }
-    return toy;
+    try{
+      return await this.db.toy.update({
+        where: {id},
+        data: updateToyDto
+      });
+    }catch{return undefined}
   }
 
   async remove(id: number) {
-    const toy =  await this.db.toy.delete({
-      where: {id}
-    });
-    if(!toy){
-      throw new NotFoundException(`Toy with id ${id} not found!`);
-    }
-    return;
+    try{
+      return await this.db.toy.delete({
+        where: {id}
+      });
+    }catch{return undefined}
   }
 }
