@@ -50,4 +50,15 @@ export class ChildrenService {
       });
     }catch{return undefined}
   }
+
+  async addToy(id: number, toyId: number){
+    try{
+      return await this.db.child.update({
+        where: {id},
+        data: {
+          toys: {connect: [{id: toyId}]}
+        }
+      })
+    }catch{return undefined}
+  }
 }

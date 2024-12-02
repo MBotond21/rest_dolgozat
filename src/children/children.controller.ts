@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, HttpCode, Put } from '@nestjs/common';
 import { ChildrenService } from './children.service';
 import { CreateChildDto } from './dto/create-child.dto';
 import { UpdateChildDto } from './dto/update-child.dto';
@@ -36,5 +36,12 @@ export class ChildrenController {
   async remove(@Param('id') id: string) {
     const child = await this.childrenService.remove(+id);
     if (!child) throw new NotFoundException(`No child with id ${id} found`);
+  }
+
+  @Put(':id/toys/:toyId')
+  async addToy(@Param('id') id: string, @Param('toyId') toyId: string){
+    const child = await this.childrenService.addToy(+id, +toyId);
+    if (!child) throw new NotFoundException(`No child with id ${id} or no toy with id ${toyId} found`);
+    return child;
   }
 }
