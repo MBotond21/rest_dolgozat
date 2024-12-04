@@ -46,9 +46,9 @@ export class ChildrenController {
   }
 
   @Delete(':id/toys/:toyId')
+  @HttpCode(200)
   async removeToy(@Param('id') id: string, @Param('toyId') toyId: string){
-    const child = await this.childrenService.addToy(+id, +toyId);
+    const child = await this.childrenService.removeToy(+id, +toyId);
     if (!child) throw new NotFoundException(`No child with id ${id} or no toy with id ${toyId} found`);
-    return child;
   }
 }
